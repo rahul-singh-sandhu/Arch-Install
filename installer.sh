@@ -13,8 +13,8 @@ sgdisk -o -n 1::+500M -t 1:EF00 -c 1:"boot" -n 2::+${swap}gb -t 2:8200 -c 2:"swa
 mkswap ${drive}p2
 swapon ${drive}p2
 mkfs.vfat -F32 ${drive}p1
-echo -en $luksPassword | cryptsetup -q -f luksFormat ${dev}p3
-echo -en $luksPassword | cryptsetup open ${dev}p3 luks
+echo -en $luksPassword | cryptsetup -q -f luksFormat ${drive}p3
+echo -en $luksPassword | cryptsetup open ${drive}p3 luks
 
 mkfs.btrfs /dev/mapper/luks
 mount /dev/mapper/luks /mnt
