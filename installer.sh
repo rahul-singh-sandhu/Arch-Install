@@ -21,11 +21,11 @@ mount /dev/mapper/luks /mnt
 btrfs sub create /mnt/@
 btrfs sub create /mnt/@home
 umount /mnt
-noatime,nodiratime,compress=zstd:1,space_cache,ssd,subvol=@ /dev/mapper/luks /mnt
-noatime,nodiratime,compress=zstd:1,space_cache,ssd,subvol=@,clear_cache /dev/mapper/luks /mnt
+mount -o noatime,nodiratime,compress=zstd:1,space_cache,ssd,subvol=@ /dev/mapper/luks /mnt
+mount -o noatime,nodiratime,compress=zstd:1,space_cache,ssd,subvol=@,clear_cache /dev/mapper/luks /mnt
 mkdir -p /mnt/{boot,home}
-noatime,nodiratime,compress=zstd:1,space_cache,ssd,subvol=@home /dev/mapper/luks /mnt/home
-mount ${disk}p1 /mnt/boot
+mount -o noatime,nodiratime,compress=zstd:1,space_cache,ssd,subvol=@home /dev/mapper/luks /mnt/home
+mount ${drive}p1 /mnt/boot
 
 pacstrap --noconfirm /mnt linux linux-headers linux-firmware sof-firmware base base-devel btrfs-progs intel-ucode
 genfstab -U /mnt >> /mnt/etc/fstab
