@@ -32,7 +32,7 @@ genfstab -U /mnt >> /mnt/etc/fstab
 cp installer-part2.sh /mnt/root/installer-part2.sh
 cp mkinitcpio.conf /mnt/root/mkinitcpio.conf
 
-arch-chroot /mnt/ chmod +x /root/installer-part2
+arch-chroot /mnt/ chmod +x /root/installer-part2.sh
 arch-chroot /mnt/ ./root/installer-part2.sh
 
 umount -a
