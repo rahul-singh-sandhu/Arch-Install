@@ -27,7 +27,7 @@ mkdir -p /mnt/{boot,home}
 mount -o noatime,nodiratime,compress=zstd:1,space_cache,ssd,subvol=@home /dev/mapper/luks /mnt/home
 mount ${drive}p1 /mnt/boot
 
-pacstrap --noconfirm /mnt linux linux-headers linux-firmware sof-firmware base base-devel btrfs-progs intel-ucode
+pacstrap /mnt linux linux-headers linux-firmware sof-firmware base base-devel btrfs-progs intel-ucode
 genfstab -U /mnt >> /mnt/etc/fstab
 cp installer-part2.sh /mnt/root/installer-part2.sh
 cp mkinitcpio.conf /mnt/root/mkinitcpio.conf
