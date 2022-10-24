@@ -45,7 +45,7 @@ echo "title Arch Linux" >> /boot/loader/entries/arch.conf
 echo "linux /vmlinuz-linux" >> /boot/loader/entries/arch.conf
 echo "initrd /intel-ucode.img" >> /boot/loader/entries/arch.conf
 echo "initrd /initramfs-linux.img" >> /boot/loader/entries/arch.conf
-echo -en "options rd.luks.name=$disk_uuid=luks root=/dev/mapper/luks rootflags=subvol=@ rd.luks.options=$disk_uuid=discard rw"
+echo -en "options rd.luks.name=$disk_uuid=luks root=/dev/mapper/luks rootflags=subvol=@ rd.luks.options=$disk_uuid=discard rw" >> /boot/loader/entries/arch.conf
 sed "/timeout/s/^#//g" -i /boot/loader/loader.conf
 sed -i '1s/^/default arch.conf\n/' /boot/loader/loader.conf
 exit
