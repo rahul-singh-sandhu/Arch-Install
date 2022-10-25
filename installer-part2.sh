@@ -19,7 +19,7 @@ read LOCALE_UTF8
 
 echo -en "$rootPassword\n$rootPassword" | passwd
 useradd -mG wheel $sudo_userUsername
-sed -i '/%wheel ALL=(ALL) NOPASSWD: ALL/s/^#//' /etc/sudoers
+sed -i "/%wheel ALL=(ALL:ALL) NOPASSWD: ALL/s/^#//g" /etc/sudoers
 echo -en "$sudo_userPasswd\n$sudo_userPasswd" | passwd $sudo_userUsername
 echo $machinehostname > /etc/hostname
 
@@ -28,15 +28,15 @@ locale-gen
 echo -en LANG=$LOCALE_UTF8 > testfile
 ln -sf /usr/share/zoneinfo/$region/$zone /etc/localtime
 hwclock --systohc
-echo -en "127.0.0.1 localhost" >> /etc/hosts
-echo -en "::1 localhost" >> /etc/hosts
-echo -en "127.0.1.1 ${machinehostname}.localdomain $machinehostname"
+echo -e "127.0.0.1 localhost" >> /etc/hosts
+echo -e "::1 localhost" >> /etc/hosts
+echo -e "127.0.1.1 ${machinehostname}.localdomain $machinehostname" >> /etc/hosts
 echo -en "KEYMAP=${keymap}" > /etc/vconsole.conf
 
 cp /root/mkinitcpio.conf /etc/mkinitcpio.conf
 mkinitcpio -P
 
-pacman --noconfirm -S zsh networkmanager dialog wpa_supplicant mtools dosfstools git xdg-utils xdg-user-dirs alsa-utils pipewire pipewire-alsa pipewire-pulse btop neofetch htop exa bat procs duf fd ripgrep bluez bluez-utils cups hplip network-manager-applet
+pacman --noconfirm -S zsh networkmanager dialog wpa_supplicant mtools dosfstools git xdg-utils xdg-user-dirs alsa-utils pipewire pipewire-alsa pipewire-pulse btop neofetch htop exa bat procs duf fd ripgrep bluez bluez-utils cups hplip network-manager-applet vim neovim nano
 
 systemctl enable NetworkManager bluetooth cups
 bootctl --path=/boot install
